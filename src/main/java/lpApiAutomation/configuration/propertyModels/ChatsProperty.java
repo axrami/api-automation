@@ -3,7 +3,7 @@ package lpApiAutomation.configuration.propertyModels;
 /**
  * Created by andrew on 5/8/16.
  */
-public class Chats extends PropertyOption{
+public class ChatsProperty extends PropertyOption{
     private int numberOfChats;
 
     public void setOverride(int overrideValue) {
@@ -15,7 +15,9 @@ public class Chats extends PropertyOption{
         return numberOfChats;
     }
 
-    public void setNumberOfChats(int numberOfChats) {
-        this.numberOfChats = numberOfChats;
+    public ChatsProperty setNumberOfChats(int numberOfChats) {
+        if(!isOverride)
+            this.numberOfChats = numberOfChats;
+        return this;
     }
 }

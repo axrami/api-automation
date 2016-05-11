@@ -1,6 +1,5 @@
 package lpApiAutomation.configuration;
 
-import com.mastfrog.netty.http.client.HttpClient;
 import lpApiAutomation.configuration.propertyModels.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,8 +8,6 @@ import javax.inject.Singleton;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -27,10 +24,12 @@ public class LPMobileConfig {
     private Properties properties;
 
     // Generator settings
-    private Visits visits = new Visits();
-    private Chats chats = new Chats();
-    private RunTime runTime = new RunTime();
-    private Report report = new Report();
+    private VisitsProperty visitsProperty;
+    private ChatsProperty chatsProperty;
+    private RunTimeProperty runTimeProperty;
+    private ReportProperty reportProperty;
+    private EnvironmentProperty environmentProperty;
+    private AppIdProperty appIdProperty;
     private boolean isLoadTest = false;
 
     // property file values
@@ -62,11 +61,13 @@ public class LPMobileConfig {
     private static final String DOMAIN_PRE_PRODUCTION = "dispatch-prod-test.look.io";
 
     public LPMobileConfig(LPMobileConfigBuilder builder) {
-        this.visits = builder.getVisits();
-        this.chats = builder.getChats();
-        this.time = builder.getTime();
-        this.report = builder.getReport();
+        this.visitsProperty = builder.getVisitsProperty();
+        this.chatsProperty = builder.getChatsProperty();
+        this.runTimeProperty = builder.getRunTimeProperty();
+        this.reportProperty = builder.getReportProperty();
+        this.environmentProperty = builder.getEnvironmentProperty();
         this.isLoadTest = builder.isLoadTest();
+        this.appIdProperty = builder.getAppIdProperty();
     }
 
     private void getPropertiesFile() {
@@ -91,23 +92,23 @@ public class LPMobileConfig {
                     case "environment":
                         break;
                     case "visits":
-                        if(!isOverride(this.visits)) {
-                            this.visits.setNumberOfVisits(getPropertyIntValue(prop));
+                        if(!isOverride(this.visitsProperty)) {
+                            this.visitsProperty.setNumberOfVisits(getPropertyIntValue(prop));
                         }
                         break;
                     case "chats":
-                        if(!isOverride(this.chats)) {
-                            this.chats.setNumberOfChats(getPropertyIntValue(prop));
+                        if(!isOverride(this.chatsProperty)) {
+                            this.chatsProperty.setNumberOfChats(getPropertyIntValue(prop));
                         }
                         break;
                     case "runTime":
-                        if(!isOverride(this.runTime)) {
-                            this.runTime.setRunTime(getPropertyIntValue(prop));
+                        if(!isOverride(this.runTimeProperty)) {
+                            this.runTimeProperty.setRunTime(getPropertyIntValue(prop));
                         }
                         break;
                     case "report":
-                        if(!isOverride(this.report)) {
-                            this.report.setReportType(getPropertyStingValue(prop));
+                        if(!isOverride(this.reportProperty)) {
+                            this.reportProperty.setReportType(getPropertyStingValue(prop));
                         }
                         break;
                     case "loadTest":

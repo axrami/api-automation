@@ -36,33 +36,33 @@ public class Main {
     public static void parseArgs(String param, String value){
         switch (param) {
             case "-visits":
-                configBuilder.setVisits(Integer.parseInt(value));
+                configBuilder.setOverrideVisits(Integer.parseInt(value));
                 logger.debug("setting visits: " + value);
                 break;
             case "-chats":
-                configBuilder.setChats(Integer.parseInt(value));
+                configBuilder.setOverrideChats(Integer.parseInt(value));
                 logger.debug("setting chats: " + value);
                 break;
             case "-time":
-                configBuilder.setRunTime(Integer.parseInt(value));
+                configBuilder.setOverrideRunTime(Integer.parseInt(value));
                 logger.debug("setting time: " + value);
                 break;
             case "-environment":
-                configBuilder.setEnvironment(value);
+                configBuilder.setOverrideEnvironment(value);
                 logger.debug("setting environment: " + value);
                 break;
             case "-appid":
-                configBuilder.setAppid(value);
+                configBuilder.setOverrideAppId(value);
                 logger.debug("setting appid: " + value);
                 break;
             case "-platform":
                 logger.debug("setting platform: " + value);
                 if(value.equalsIgnoreCase("ios")) {
-                    configBuilder.setPlatform("Apple iOS");
+                    configBuilder.setOverridePlatform("Apple iOS");
                 } else if(value.equalsIgnoreCase("web")){
-                    configBuilder.setPlatform("Web");
+                    configBuilder.setOverridePlatform("Web");
                 } else if(value.equals("android")) {
-                    configBuilder.setPlatform("Android");
+                    configBuilder.setOverridePlatform("Android");
                 } else {
                     logger.debug("invalid platform: " + value);
                     System.exit(1);
@@ -70,7 +70,7 @@ public class Main {
                 break;
             case "-report":
                 logger.debug("setting report values: " + value);
-                configBuilder.setReport(value);
+                configBuilder.setOverrideReport(value);
                 break;
             case "-properties":
                 configBuilder.setPropertiesFilePath(value);

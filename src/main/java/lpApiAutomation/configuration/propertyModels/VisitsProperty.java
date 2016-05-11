@@ -3,7 +3,7 @@ package lpApiAutomation.configuration.propertyModels;
 /**
  * Created by andrew on 5/8/16.
  */
-public class Visits extends PropertyOption {
+public class VisitsProperty extends PropertyOption {
     private int numberOfVisits = 0;
 
     public void setOverride(int overrideValue) {
@@ -15,7 +15,9 @@ public class Visits extends PropertyOption {
         return numberOfVisits;
     }
 
-    public void setNumberOfVisits(int numberOfVisits) {
-        this.numberOfVisits = numberOfVisits;
+    public VisitsProperty setNumberOfVisits(int numberOfVisits) {
+        if(!isOverride)
+            this.numberOfVisits = numberOfVisits;
+        return this;
     }
 }
